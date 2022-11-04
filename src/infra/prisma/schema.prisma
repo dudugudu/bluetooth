@@ -1,0 +1,67 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+
+
+model User {
+  id         Int    @id @default(autoincrement())
+  name       String
+  password   String
+  sector     String
+  email      String
+  telephone  String
+  permissions    String  @db.LongText
+}
+
+model CheckList {
+  id         Int    @id @default(autoincrement())
+  name       String
+  created_by String
+
+  locked    Boolean
+  checklist String  @db.LongText
+}
+
+model deleted_CheckList {
+  id         Int    @id @default(autoincrement())
+  name       String
+  created_by String
+  deleted_by String
+  checklist  String @db.LongText
+}
+
+model NewAcount {
+  id           Int    @id @default(autoincrement())
+  name         String
+  datafromlist String
+}
+
+model NewDesktop {
+  id           Int    @id @default(autoincrement())
+  name         String
+  datafromlist String
+}
+
+model relatorio {
+  id         Int      @id @default(autoincrement())
+  name_check String
+  data_exec  DateTime
+  quem_exec  String
+  pra_quem   String
+  maquina    String
+  status     String
+  obs        String
+  topbarData String   @db.LongText
+  bodyData   String   @db.LongText
+  footerData String   @db.LongText
+
+}
